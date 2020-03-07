@@ -1,108 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "c_fun.c"
-
-int row = 5;
-int col =5;
+char gameTable[10][10];
+char screenTable[10][10];
 
 void clear()
 {
     system("clear");
 }
 
-char table[10][10];
-
-void clearTable()
+void prepTables()
 {
-    for (int row = 0; row < 10; row++)
+    for (int i = 0; i < 10; i++)
     {
-        for (int col = 0; col < 10; col++)
+        for (int j = 0; j < 10; j++)
         {
-            if (row == 0)
+            char c = '0';
+            if (i == 0)
             {
-                table[row][col] = '0' + col;
+                c += j;
             }
-            else if (col == 0)
+            else if (j == 0)
             {
-                table[row][col] = '0' + row;
+                c += i;
             }
             else
             {
-                table[row][col] = ' ';
+                c + '0';
             }
         }
     }
-}
-void placeAdmiral(int r, int c)
-{
-    table[r][c] = 'A';
-    table[r-1][c-1] = 'A';
-    table[r-1][c+1] = 'A';
-    table[r+1][c-1] = 'A';
-    table[r+1][c+1] = 'A';
-}
-void removeAdmiral(int r, int c)
-{
-    table[r][c] = ' ';
-    table[r-1][c-1] = ' ';
-    table[r-1][c+1] = ' ';
-    table[r+1][c-1] = ' ';
-    table[r+1][c+1] = ' ';
-}
-void moveAdmiral(int r, int c)
-{
-    removeAdmiral(row,col);
-    placeAdmiral(r,c);
-    row = r;
-    col = c;
+
 }
 void printTable()
 {
-    clear();
-    for (int row = 0; row < 10; row++)
+    for (int i = 0; i < 10; i++)
     {
-        for (int col = 0; col < 10; col++)
+        for (int j = 0; j < 10; j++)
         {
-            printf("%c ", table[row][col]);
+            printf("%c", screenTable[i][j]);
         }
-        printf("\n");
-    }
-}
-void start()
-{
-    clearTable();
-    placeAdmiral(row,col);
-    printTable();
-    char c = get_ch();
-    int nr = row;
-    int nc = col;
-    switch (c)
-    {
-    case 'W':
-    case 'w':
-        nr--;
-        break;
-    case 'A':
-    case 'a':
-        nc--;
-        break;
-    case 'S':
-    case 's':
-        nr++;
-        break;
-    case 'D':
-    case 'd':
-        nc++;      
-        break;
-    }
-    moveAdmiral(nr,nc);
-        printTable();
-}
-int main()
-{
-    while (1)
-    {
-    start();
+        printf("\n");       
     }
     
+}
+char getUserInput()
+{
+    char c;
+
+    return c;
+}
+
+int main()
+{
+    prepTables();
+    printTable();
 }
